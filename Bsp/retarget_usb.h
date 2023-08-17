@@ -9,8 +9,6 @@
 #include <sys/stat.h>
 #include <stdio.h>
 
-void RetargetInit(UART_HandleTypeDef *huart);
-
 int _isatty(int fd);
 
 int _write(int fd, char *ptr, int len);

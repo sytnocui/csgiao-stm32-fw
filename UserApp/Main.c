@@ -5,7 +5,7 @@
 #include <tim.h>
 #include <interface_uart.h>
 #include <pwm.h>
-#include <retarget.h>
+#include <retarget_usb.h>
 #include <utils/ctrl_math.h>
 #include <wave.h>
 #include "common_inc.h"
@@ -38,7 +38,7 @@ void Main(void) {
         //SPEAKER PWM DMA Send, not necessary to enable
         HAL_TIM_PWM_Start_DMA(&htim2, TIM_CHANNEL_2,(uint32_t*)SOUND_DATA, SOUND_LENGTH);
 
-//        printf("Hello World!\r\n");
+        printf("Hello World!\r\n");
         //Blink
         HAL_GPIO_TogglePin(RGB_G_GPIO_Port,RGB_G_Pin);
         //-----------------------------Delay
