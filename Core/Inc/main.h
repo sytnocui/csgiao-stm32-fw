@@ -57,20 +57,18 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define SPKER_PWM_Pin GPIO_PIN_1
-#define SPKER_PWM_GPIO_Port GPIOA
+#define ADC_VBAT_Pin GPIO_PIN_0
+#define ADC_VBAT_GPIO_Port GPIOA
+#define LASER_PWM_Pin GPIO_PIN_1
+#define LASER_PWM_GPIO_Port GPIOA
 #define LASER_TX_Pin GPIO_PIN_2
 #define LASER_TX_GPIO_Port GPIOA
 #define LASER_RX_Pin GPIO_PIN_3
 #define LASER_RX_GPIO_Port GPIOA
-#define LASER_PWM_Pin GPIO_PIN_6
-#define LASER_PWM_GPIO_Port GPIOA
-#define BEEP_Pin GPIO_PIN_7
-#define BEEP_GPIO_Port GPIOA
 #define MAG_Pin GPIO_PIN_0
 #define MAG_GPIO_Port GPIOB
-#define ADC_VBAT_Pin GPIO_PIN_1
-#define ADC_VBAT_GPIO_Port GPIOB
+#define SPKER_PWM_Pin GPIO_PIN_1
+#define SPKER_PWM_GPIO_Port GPIOB
 #define BT_TX_Pin GPIO_PIN_9
 #define BT_TX_GPIO_Port GPIOA
 #define BT_RX_Pin GPIO_PIN_10

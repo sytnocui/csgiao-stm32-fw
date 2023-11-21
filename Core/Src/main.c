@@ -58,7 +58,27 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+void USB_GPIO_Reload(void)
+{
+    GPIO_InitTypeDef GPIO_InitStruct;
+    /* GPIO Ports Clock Enable */
+    __HAL_RCC_GPIOA_CLK_ENABLE();
+    /*Configure GPIO pin Output Level */
+    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_12, GPIO_PIN_RESET);
+    /*Configure GPIO pin : PA12 */
+    GPIO_InitStruct.Pin = GPIO_PIN_12;
+    GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+    GPIO_InitStruct.Pull = GPIO_PULLDOWN;
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+    HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
+    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_12,
+                      GPIO_PIN_RESET);
+    HAL_Delay(65);
+    //先把PA12拉低再拉高，利用D+模拟USB的拔插动�??
+    HAL_GPIO_WritePin(GPIOA,GPIO_PIN_12,GPIO_PIN_SET);
+    HAL_Delay(65);
+}
 /* USER CODE END 0 */
 
 /**
@@ -84,13 +104,13 @@ int main(void)
   SystemClock_Config();
 
   /* USER CODE BEGIN SysInit */
+    USB_GPIO_Reload();
   //再次注意，DMA初始化一定要在用DMA的东西初始化前面
     MX_DMA_Init();
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
-  MX_ADC1_Init();
   MX_TIM2_Init();
   MX_TIM3_Init();
   MX_TIM4_Init();
@@ -98,6 +118,7 @@ int main(void)
   MX_DMA_Init();
   MX_USB_DEVICE_Init();
   MX_USART2_UART_Init();
+  MX_ADC1_Init();
   /* USER CODE BEGIN 2 */
     Main();
   /* USER CODE END 2 */

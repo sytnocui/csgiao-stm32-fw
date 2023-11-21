@@ -29,7 +29,6 @@ void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)
 
 /* Default Entry -------------------------------------------------------*/
 void Main(void) {
-//    RetargetInit(&WIFI_UART);
 
     //wifi 串口DMA空闲中断 enable
     HAL_UARTEx_ReceiveToIdle_DMA(&BLUETOOTH_UART, wifi_rx_buffer, sizeof(wifi_rx_buffer));
@@ -42,6 +41,6 @@ void Main(void) {
         //Blink
         HAL_GPIO_TogglePin(RGB_G_GPIO_Port,RGB_G_Pin);
         //-----------------------------Delay
-        HAL_Delay(5000);
+        HAL_Delay(2000);
     }
 }

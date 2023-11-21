@@ -7,6 +7,7 @@
 #include <stdint.h>
 #include <usbd_cdc_if.h>
 
+
 #if !defined(OS_USE_SEMIHOSTING)
 
 #define STDIN_FILENO  0
