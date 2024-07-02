@@ -39,7 +39,7 @@ void Main(void) {
 
         printf("Hello World!\r\n");
         //Blink
-        HAL_GPIO_TogglePin(RGB_G_GPIO_Port,RGB_G_Pin);
+        HAL_GPIO_TogglePin(BOARD_LED_GPIO_Port,BOARD_LED_Pin);
         //-----------------------------Delay
         HAL_Delay(2000);
     }
