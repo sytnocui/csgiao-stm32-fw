@@ -25,6 +25,7 @@ extern MultiTimer timer3;
 void Timer1MAGCallback(MultiTimer* timer, void* userData);
 void Timer2FireCallback(MultiTimer* timer, void* userData);
 void Fire(void);
+void Hit(void);
 
 void BTN_SINGLE_Click_Handler(void* btn);
 void BTN_LONG_Press_Hold_Handler(void* btn);

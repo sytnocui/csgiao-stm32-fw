@@ -59,9 +59,8 @@ void BTN_SINGLE_Click_Handler(void* btn)
             break;
         case buttonLaserId: //受伤
             PlayerHitUpdate(&player);
-//            HAL_GPIO_TogglePin(RX_LED_GPIO_Port,RX_LED_Pin);
-//            HAL_GPIO_WritePin(RX_LED_GPIO_Port,RX_LED_Pin,GPIO_PIN_SET);
-Hit();
+
+
             break;
         default:
             break;
@@ -96,7 +95,7 @@ void BTN_LONG_Press_Hold_Handler(void* btn)
     {
         case buttonFireId:
             PlayerFireUpdate(&player);
-//            HAL_GPIO_TogglePin(BOARD_LED_GPIO_Port,BOARD_LED_Pin);
+
 
             //TODO:连发之后统一处理，与射速有关先不管。
             break;

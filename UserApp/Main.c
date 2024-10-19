@@ -74,7 +74,7 @@ void Main(void) {
     button_init(&buttonLaser, read_button_GPIO, 0,buttonLaserId);
     // 按键回调函数（软件相关）
     // fire按钮
-    button_attach(&buttonFire, SINGLE_CLICK,     BTN_SINGLE_Click_Handler);
+    button_attach(&buttonFire, PRESS_DOWN,     BTN_SINGLE_Click_Handler);
     button_attach(&buttonFire, LONG_PRESS_HOLD,     BTN_LONG_Press_Hold_Handler);
     // reload按钮
     button_attach(&buttonReload, LONG_PRESS_START,     BTN_LONG_Press_Start_Handler);
@@ -94,7 +94,7 @@ void Main(void) {
     ////==========================游戏逻辑相关===========================================
     PlayerInit(&player);
 
-    PlayerEnterBattle(&player);
+//    PlayerEnterBattle(&player);
 
     //启动定时器
     HAL_TIM_Base_Start_IT(&htim4);

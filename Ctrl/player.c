@@ -41,52 +41,67 @@ void PlayerEnterBattle(Player_t* _player){
 }
 
 void PlayerHitUpdate(Player_t* _player){
-    //不在战斗就退出
-    if(_player->playerState != battling){
-        return;
-    }
+    //检查CD
     if (_player->gameTime - _player->lastHitTime <= _player->HitCD){
         return;
     }
     _player->lastHitTime = _player->gameTime;
+
+
+    //基础反馈需要随时完成，不需要管是否开战，是否存活
+    Hit();
+    PlayMusic(HIT_SOUND_DATA, HIT_SOUND_LENGTH);
+
     _player->hp -= 10;
     BlueToothSendHit(_player->hp);
 
+    //不在战斗就退出
+    if(_player->playerState != battling){
+        return;
+    }
 
+    //状态处理只有开战后才进行
     //判断是否死亡
     if (_player->hp <= 0){
         _player->playerState = die;
     }
 
-    PlayMusic(HIT_SOUND_DATA, HIT_SOUND_LENGTH);
+
 }
 
 
 void PlayerFireUpdate(Player_t* _player){
-    //不在战斗就退出
-    if(_player->playerState != battling){
-        return;
-    }
+    //检查CD
     if (_player->gameTime - _player->lastFireTime <= _player->FireCD){
         return;
     }
     _player->lastFireTime = _player->gameTime;
+
+
+    //死了就退出
+    if(_player->playerState == die){
+        return;
+    }
 
     //判断弹夹里有没有子弹
     if (_player->bullet_num <= 0){
         PlayMusic(NOFIRE_SOUND_DATA, NOFIRE_SOUND_LENGTH);
         return;
     }
+
     _player->bullet_num -= 1;
     Fire(); //硬件发激光
     PlayMusic(FIRE_SOUND_DATA, FIRE_SOUND_LENGTH);
     BlueToothSendFire(_player->bullet_num);
 
+
+
+
 }
 
 void PlayerReloadUpdate(Player_t* _player){
-    //不在战斗就退出
-    if(_player->playerState != battling){
+    //死了就退出
+    if(_player->playerState == die){
         return;
     }
 
@@ -111,10 +126,6 @@ void PlayerReloadUpdate(Player_t* _player){
 
 
 void PlayerTimeUpdate(Player_t* _player){
-    //不在战斗就退出
-    if(_player->playerState != battling){
-        return;
-    }
     _player->gameTime += 0.005f;
 
 }
