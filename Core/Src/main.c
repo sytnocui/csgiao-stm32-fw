@@ -48,6 +48,7 @@
 
 /* USER CODE BEGIN PV */
 
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -75,7 +76,7 @@ void USB_GPIO_Reload(void)
     HAL_GPIO_WritePin(GPIOA, GPIO_PIN_12,
                       GPIO_PIN_RESET);
     HAL_Delay(65);
-    //先把PA12拉低再拉高，利用D+模拟USB的拔插动�??
+    //先把PA12拉低再拉高，利用D+模拟USB的拔插动�????
     HAL_GPIO_WritePin(GPIOA,GPIO_PIN_12,GPIO_PIN_SET);
     HAL_Delay(65);
 }
@@ -87,6 +88,7 @@ void USB_GPIO_Reload(void)
   */
 int main(void)
 {
+
   /* USER CODE BEGIN 1 */
 
   /* USER CODE END 1 */
@@ -104,21 +106,20 @@ int main(void)
   SystemClock_Config();
 
   /* USER CODE BEGIN SysInit */
-    USB_GPIO_Reload();
+//    USB_GPIO_Reload();
   //再次注意，DMA初始化一定要在用DMA的东西初始化前面
-    MX_DMA_Init();
+//    MX_DMA_Init();
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_DMA_Init();
+  MX_TIM2_Init();
   MX_TIM3_Init();
   MX_TIM4_Init();
-  MX_USART1_UART_Init();
-  MX_TIM2_Init();
-  MX_USB_DEVICE_Init();
-  MX_USART2_UART_Init();
   MX_ADC1_Init();
+  MX_USB_DEVICE_Init();
+  MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
     Main();
   /* USER CODE END 2 */

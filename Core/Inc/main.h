@@ -79,6 +79,7 @@ void Error_Handler(void);
 #define KEY_FIRE_GPIO_Port GPIOB
 #define KEY_RELOAD_Pin GPIO_PIN_9
 #define KEY_RELOAD_GPIO_Port GPIOB
+
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */

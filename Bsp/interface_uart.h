@@ -12,10 +12,18 @@ extern "C" {
 #include "usart.h"
 
 #define WIFI_BUFFER_LENGTH     18
-extern uint8_t wifi_rx_buffer[WIFI_BUFFER_LENGTH];
+extern uint8_t bluetooth_rx_buffer[WIFI_BUFFER_LENGTH];
 
-void WIFIReceived(uint8_t* _rx_buffer);
+#define LASER_BUFFER_LENGTH     2
+extern uint8_t laser_rx_buffer[LASER_BUFFER_LENGTH];
+extern uint8_t laser_tx_buffer[LASER_BUFFER_LENGTH];
 
+void BlueToothReceived(uint8_t* _rx_buffer);
+
+void BlueToothSendFire(int _bulletNum);
+void BlueToothSendHit(int _hp);
+void BlueToothSendReload(int _bulletNum,int _magNum);
+void BlueToothSend(const char* _str);
 
 #ifdef __cplusplus
 }

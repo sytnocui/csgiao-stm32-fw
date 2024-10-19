@@ -2,9 +2,7 @@
 // Created by 10798 on 2023/1/6.
 //
 
-#include <utils/ctrl_math.h>
 #include "pwm.h"
-#include "stdio.h"
 #include "tim.h"
 
 // LASER PWM
@@ -19,12 +17,13 @@
 
 void PWMInit(void){
     //LASER PWM使能
-    HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_1);
+    HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_2);
 }
 
 
 void PWMCmdSend(void){
     //LASER 发送
-    __HAL_TIM_SetCompare(&htim3, TIM_CHANNEL_1, LASER_PWM);
+    __HAL_TIM_SetCompare(&htim2, TIM_CHANNEL_2, LASER_PWM);
 
 }
+

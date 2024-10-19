@@ -48,8 +48,8 @@
   * @{
   */
 /* Define size for the receive and transmit buffer over CDC */
-#define APP_RX_DATA_SIZE  1000
-#define APP_TX_DATA_SIZE  1000
+#define APP_RX_DATA_SIZE  1024
+#define APP_TX_DATA_SIZE  1024
 /* USER CODE BEGIN EXPORTED_DEFINES */
 
 /* USER CODE END EXPORTED_DEFINES */
@@ -64,7 +64,8 @@
   */
 
 /* USER CODE BEGIN EXPORTED_TYPES */
-
+extern uint32_t usb_rx_len;
+extern uint8_t usb_rx_data[100];
 /* USER CODE END EXPORTED_TYPES */
 
 /**

@@ -11,6 +11,8 @@ extern "C" {
 
 #include "main.h"
 
+
+
 #define BLUETOOTH_UART		   (huart1)
 #define LASER_UART		   (huart2)
 
