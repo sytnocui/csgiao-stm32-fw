@@ -12,6 +12,7 @@
 #include "common_inc.h"
 #include "player.h"
 #include "usbd_cdc_if.h"
+#include "interface_use.h"
 
 
 /* Thread Definitions -----------------------------------------------------*/
@@ -29,6 +30,9 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
         //5ms
         //按键扫描
         button_ticks();
+
+        //USB 接收判断
+        USBReceived(usb_rx_buffer);
 
         //时间更新
         PlayerTimeUpdate(&player);
@@ -104,24 +108,7 @@ void Main(void) {
         MultiTimerYield();
         //-----------------------------Delay
         HAL_Delay(1);
-//if(HAL_GPIO_ReadPin(LASER_RX_GPIO_Port,LASER_RX_Pin))
-//{
-//    HAL_GPIO_WritePin(BOARD_LED_GPIO_Port,BOARD_LED_Pin,GPIO_PIN_SET);
-//}
-//else{
-//    HAL_GPIO_WritePin(BOARD_LED_GPIO_Port,BOARD_LED_Pin,GPIO_PIN_RESET);
-//
-//}
 
-//     CDC_Transmit_FS(usb_rx_data,1);
-//        HAL_Delay(500);
-//        HAL_GPIO_TogglePin(RX_LED_GPIO_Port,RX_LED_Pin);
-//    if(HAL_GPIO_ReadPin(KEY_FIRE_GPIO_Port,KEY_FIRE_Pin)) {
-//        HAL_GPIO_TogglePin(LASER_TX_GPIO_Port, LASER_TX_Pin);
-//    }
-//        CDC_Transmit_FS(char1,sizeof(char1));
-//        HAL_Delay(500);
-//        HAL_GPIO_TogglePin(BOARD_LED_GPIO_Port,BOARD_LED_Pin);
 
     }
 }

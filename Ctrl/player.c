@@ -7,6 +7,7 @@
 #include "menu.h"
 #include "wave.h"
 #include "interface_uart.h"
+#include "interface_use.h"
 
 Player_t player;
 
@@ -54,6 +55,7 @@ void PlayerHitUpdate(Player_t* _player){
 
     _player->hp -= 10;
     BlueToothSendHit(_player->hp);
+    USBSendHit(_player->hp);
 
     //不在战斗就退出
     if(_player->playerState != battling){
@@ -93,9 +95,7 @@ void PlayerFireUpdate(Player_t* _player){
     Fire(); //硬件发激光
     PlayMusic(FIRE_SOUND_DATA, FIRE_SOUND_LENGTH);
     BlueToothSendFire(_player->bullet_num);
-
-
-
+    USBSendFire(_player->bullet_num);
 
 }
 
@@ -122,10 +122,10 @@ void PlayerReloadUpdate(Player_t* _player){
     }
     PlayMusic(RELOAD_SOUND_DATA, RELOAD_SOUND_LENGTH);
     BlueToothSendReload(_player->bullet_num,_player->mag_num);
+    USBSendReload(_player->bullet_num,_player->mag_num);
 }
 
 
 void PlayerTimeUpdate(Player_t* _player){
     _player->gameTime += 0.005f;
-
 }

@@ -64,8 +64,7 @@
   */
 
 /* USER CODE BEGIN EXPORTED_TYPES */
-extern uint32_t usb_rx_len;
-extern uint8_t usb_rx_data[100];
+
 /* USER CODE END EXPORTED_TYPES */
 
 /**
