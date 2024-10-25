@@ -20,15 +20,17 @@ void USBReceived(uint8_t* _rx_buf)
     }
     usb_rx_flag = false;
 
-
+    HAL_GPIO_TogglePin(BOARD_LED_GPIO_Port,BOARD_LED_Pin);
 
 
     //TODO:至少需要解析连接蓝牙与进入游戏
 
 }
 
+
+//重要！！！总长度必须小于64byte，否则会被强制分包
 void USBSend(const char* _str){
-    CDC_Transmit_FS((uint8_t*) _str,1);
+    CDC_Transmit_FS((uint8_t*) _str,strlen(_str));
 }
 
 void USBSendFire(int _bulletNum){

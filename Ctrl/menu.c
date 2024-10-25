@@ -96,7 +96,6 @@ void BTN_LONG_Press_Hold_Handler(void* btn)
         case buttonFireId:
             PlayerFireUpdate(&player);
 
-
             //TODO:连发之后统一处理，与射速有关先不管。
             break;
         default:

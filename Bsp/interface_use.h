@@ -10,6 +10,7 @@ extern "C" {
 #endif
 
 #include "main.h"
+#include "stdbool.h"
 
 #define USB_BUFFER_LENGTH     255
 
