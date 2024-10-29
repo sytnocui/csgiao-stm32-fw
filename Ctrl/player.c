@@ -16,14 +16,14 @@ void PlayerInit(Player_t* _player){
     _player->bullet_num = 30;
     _player->mag_num = 120;
 
-    _player->playerState = notConnect;
+    _player->playerState = preparing;
 
     _player->damage = 10;
     _player->bullet_max_num = 30;
 
     _player->lastFireTime = 0.0f;
-    _player->FireCD = 0.15f;
-    _player->lastHitTime = 0.0f;   
+    _player->FireCD = 0.12f;
+    _player->lastHitTime = 0.0f;
     _player->HitCD = 0.1f;
 
     _player->gameTime = 0.0f;
@@ -39,6 +39,29 @@ void PlayerEnterBattle(Player_t* _player){
     _player->playerState = battling;
 
     _player->gameTime = 0.0f;
+    _player->lastFireTime = 0.0f;
+    _player->lastHitTime = 0.0f;
+}
+
+//每次完成战斗都运行一次
+void PlayerQuitBattle(Player_t* _player){
+    _player->hp = 100;
+    _player->bullet_num = 30;
+    _player->mag_num = 120;
+    _player->playerState = preparing;
+
+    _player->gameTime = 0.0f;
+    _player->lastFireTime = 0.0f;
+    _player->lastHitTime = 0.0f;
+
+}
+
+void PlayerResurrect(Player_t* _player){
+    _player->hp = 100;
+    _player->bullet_num = 30;
+    _player->mag_num = 120;
+    _player->playerState = battling;
+
 }
 
 void PlayerHitUpdate(Player_t* _player){

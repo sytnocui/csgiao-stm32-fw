@@ -7,6 +7,7 @@
 #include <stdbool.h>
 #include "interface_use.h"
 #include "usbd_cdc_if.h"
+#include "player.h"
 
 bool usb_rx_flag = false;
 uint32_t usb_rx_len=0;
@@ -22,8 +23,20 @@ void USBReceived(uint8_t* _rx_buf)
 
     HAL_GPIO_TogglePin(BOARD_LED_GPIO_Port,BOARD_LED_Pin);
 
+    USBSend((char*) _rx_buf);
 
-    //TODO:至少需要解析连接蓝牙与进入游戏
+    //进入战斗
+    if (strcmp((char *)_rx_buf, "EnterBattle") == 0){
+        PlayerEnterBattle(&player);
+    }
+    else if (strcmp((char *)_rx_buf, "QuitBattle") == 0){
+        PlayerQuitBattle(&player);
+    }
+    else if (strcmp((char *)_rx_buf, "Resurrect") == 0){
+        PlayerResurrect(&player);
+    }
+
+    memset(usb_rx_buffer, 0, USB_BUFFER_LENGTH);
 
 }
 
