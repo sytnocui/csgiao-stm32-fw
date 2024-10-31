@@ -25,8 +25,9 @@ void USBReceived(uint8_t* _rx_buf)
 
     USBSend((char*) _rx_buf);
 
-    //进入战斗
-    if (strcmp((char *)_rx_buf, "EnterBattle") == 0){
+
+    //不带参数的协议
+    if (strcmp((char *)_rx_buf, "EnterBattle") == 0){ //进入战斗
         PlayerEnterBattle(&player);
     }
     else if (strcmp((char *)_rx_buf, "QuitBattle") == 0){
@@ -34,6 +35,19 @@ void USBReceived(uint8_t* _rx_buf)
     }
     else if (strcmp((char *)_rx_buf, "Resurrect") == 0){
         PlayerResurrect(&player);
+    }
+    else if (strcmp((char *)_rx_buf, "Die") == 0){
+        PlayerDie(&player);
+    }
+    //带参数的协议
+    else if (strncmp((char *)_rx_buf, "UpdateData", strlen("UpdateData")) == 0){
+        PlayerUpdateData(&player,_rx_buf);
+    }
+    else if (strncmp((char *)_rx_buf, "ChangeGun", strlen("ChangeGun")) == 0){
+        PlayerChangeGun(&player,_rx_buf);
+    }
+    else if (strncmp((char *)_rx_buf, "ChangeArmor", strlen("ChangeArmor")) == 0){
+        PlayerChangeArmor(&player,_rx_buf);
     }
 
     memset(usb_rx_buffer, 0, USB_BUFFER_LENGTH);

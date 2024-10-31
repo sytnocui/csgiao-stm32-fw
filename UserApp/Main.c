@@ -3,11 +3,9 @@
 //
 #include <stdbool.h>
 #include <tim.h>
-#include <interface_uart.h>
 #include <pwm.h>
 #include <multi_button.h>
 #include <menu.h>
-#include <wave.h>
 #include <MultiTimer.h>
 #include "common_inc.h"
 #include "player.h"
@@ -39,21 +37,21 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
     }
 }
 
-/* UART Callbacks -------------------------------------------------------*/
-//空闲中断在这里进行处理
-void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)
-{
-    if(huart->Instance==USART1)
-    {
-//        HAL_GPIO_TogglePin(BOARD_LED_GPIO_Port,BOARD_LED_Pin);
-
-        BlueToothReceived(bluetooth_rx_buffer);
-
-        //重新打开DMA接收 idle中断
-        HAL_UARTEx_ReceiveToIdle_DMA(&BLUETOOTH_UART, bluetooth_rx_buffer, sizeof(bluetooth_rx_buffer));
-
-    }
-}
+///* UART Callbacks -------------------------------------------------------*/
+////空闲中断在这里进行处理
+//void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)
+//{
+//    if(huart->Instance==USART1)
+//    {
+////        HAL_GPIO_TogglePin(BOARD_LED_GPIO_Port,BOARD_LED_Pin);
+//
+////        BlueToothReceived(bluetooth_rx_buffer);
+//
+//        //重新打开DMA接收 idle中断
+//        HAL_UARTEx_ReceiveToIdle_DMA(&BLUETOOTH_UART, bluetooth_rx_buffer, sizeof(bluetooth_rx_buffer));
+//
+//    }
+//}
 
 uint8_t char1[]={0x5A};
 
@@ -62,7 +60,7 @@ void Main(void) {
 
     ////==========================BT相关===========================================
     //BT 串口DMA空闲中断 enable
-    HAL_UARTEx_ReceiveToIdle_DMA(&BLUETOOTH_UART, bluetooth_rx_buffer, sizeof(bluetooth_rx_buffer));
+//    HAL_UARTEx_ReceiveToIdle_DMA(&BLUETOOTH_UART, bluetooth_rx_buffer, sizeof(bluetooth_rx_buffer));
 
     // 蓝牙初始化配置
     //TODO:注意这里每个新机器都要重新设置一次，设置完了之后就会一直保持是30ms了。

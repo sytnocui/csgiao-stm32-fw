@@ -35,14 +35,14 @@ void Timer3HitCallback(MultiTimer* timer, void* userData)
 
 void Fire(void){
     HAL_GPIO_WritePin(LASER_TX_GPIO_Port,LASER_TX_Pin,GPIO_PIN_RESET); //发射
-    MultiTimerStart(&timer2, 100, Timer2FireCallback, NULL);
+    MultiTimerStart(&timer2, 50, Timer2FireCallback, NULL);
 
     HAL_GPIO_WritePin(MAG_GPIO_Port,MAG_Pin,GPIO_PIN_SET); //力反馈
     MultiTimerStart(&timer1, 50, Timer1MAGCallback, NULL);
 }
 void Hit(void){
     HAL_GPIO_WritePin(RX_LED_GPIO_Port,RX_LED_Pin,GPIO_PIN_SET);
-    MultiTimerStart(&timer3, 500, Timer3HitCallback, NULL);
+    MultiTimerStart(&timer3, 200, Timer3HitCallback, NULL);
 }
 
 ////==========================按键驱动相关===========================================

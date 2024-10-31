@@ -5,6 +5,8 @@
 #ifndef ARPUBG_FW_PLAYER_H
 #define ARPUBG_FW_PLAYER_H
 
+#include <stdint-gcc.h>
+
 typedef enum PlayerState{
     preparing,
     battling,
@@ -37,6 +39,10 @@ void PlayerInit(Player_t* _player);
 void PlayerEnterBattle(Player_t* _player);
 void PlayerQuitBattle(Player_t* _player);
 void PlayerResurrect(Player_t* _player);
+void PlayerDie(Player_t* _player);
+void PlayerUpdateData(Player_t* _player,uint8_t* data);
+void PlayerChangeGun(Player_t* _player,uint8_t* data);
+void PlayerChangeArmor(Player_t* _player,uint8_t* data);
 void PlayerHitUpdate(Player_t* _player);
 void PlayerFireUpdate(Player_t* _player);
 void PlayerReloadUpdate(Player_t* _player);
