@@ -28,40 +28,27 @@ void PlayerInit(Player_t* _player){
     _player->bullet_max_num = 30;
     _player->FireCD = 0.15f;
 
-
-
     _player->lastFireTime = 0.0f;
     _player->lastHitTime = 0.0f;
 
-
     _player->gameTime = 0.0f;
+
+    HAL_GPIO_WritePin(RX_LED_GPIO_Port,RX_LED_Pin,GPIO_PIN_RESET);
 }
 
 //每次进入战斗都init一下
 void PlayerEnterBattle(Player_t* _player){
     //错误状态指示清空
 
-    _player->hp = 100;
-    _player->bullet_num = 30;
-    _player->mag_num = 120;
+    PlayerInit(_player);
     _player->playerState = battling;
 
-    _player->gameTime = 0.0f;
-    _player->lastFireTime = 0.0f;
-    _player->lastHitTime = 0.0f;
+
 }
 
 //每次完成战斗都运行一次
 void PlayerQuitBattle(Player_t* _player){
-    _player->hp = 100;
-    _player->bullet_num = 30;
-    _player->mag_num = 120;
-    _player->playerState = preparing;
-
-    _player->gameTime = 0.0f;
-    _player->lastFireTime = 0.0f;
-    _player->lastHitTime = 0.0f;
-
+    PlayerInit(_player);
 }
 
 void PlayerResurrect(Player_t* _player){
@@ -70,6 +57,7 @@ void PlayerResurrect(Player_t* _player){
     _player->mag_num = 120;
     _player->playerState = battling;
 
+    HAL_GPIO_WritePin(RX_LED_GPIO_Port,RX_LED_Pin,GPIO_PIN_RESET);
 }
 
 void PlayerDie(Player_t* _player){
@@ -117,7 +105,7 @@ void PlayerHitUpdate(Player_t* _player){
     Hit();
 //    PlayMusic(HIT_SOUND_DATA, HIT_SOUND_LENGTH);
 
-    _player->hp -= 10;
+    _player->hp -= _player->damage;
 //    BlueToothSendHit(_player->hp);
     USBSendHit(_player->hp);
 
@@ -180,4 +168,8 @@ void PlayerReloadUpdate(Player_t* _player){
 
 void PlayerTimeUpdate(Player_t* _player){
     _player->gameTime += 0.005f;
+
+    if (_player->playerState == die){
+        HAL_GPIO_WritePin(RX_LED_GPIO_Port,RX_LED_Pin,GPIO_PIN_SET);
+    }
 }
