@@ -19,6 +19,7 @@ typedef struct Player{
     int bullet_num;
     int mag_num;
 
+    int defense;
     int damage;
     int bullet_max_num;
 

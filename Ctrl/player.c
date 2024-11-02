@@ -20,11 +20,12 @@ void PlayerInit(Player_t* _player){
     _player->playerState = preparing;
 
     //护甲
-    _player->damage = 20;
+    _player->defense = 0;
     _player->HitCD = 0.1f;
 
 
     //武器
+    _player->damage = 20;  //现在武器的 damage 没有用，只能改defense
     _player->bullet_max_num = 30;
     _player->FireCD = 0.15f;
 
@@ -85,7 +86,7 @@ void PlayerChangeGun(Player_t* _player,uint8_t* data){
 
 void PlayerChangeArmor(Player_t* _player,uint8_t* data){
     strtok(data, "|"); // 获取第一个分隔 协议名
-    _player->damage = atoi(strtok(NULL, ",")); // 每次受到的伤害数
+    _player->defense = atoi(strtok(NULL, ",")); // 每次受到的伤害数
     _player->HitCD = atoff(strtok(NULL, ",")); // 免伤CD
 }
 
@@ -105,7 +106,7 @@ void PlayerHitUpdate(Player_t* _player){
     Hit();
 //    PlayMusic(HIT_SOUND_DATA, HIT_SOUND_LENGTH);
 
-    _player->hp -= _player->damage;
+    _player->hp -= (_player->damage - _player->defense );
 //    BlueToothSendHit(_player->hp);
     USBSendHit(_player->hp);
 
