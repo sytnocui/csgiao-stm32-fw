@@ -27,7 +27,7 @@ void PlayerInit(Player_t* _player){
     //武器
     _player->damage = 20;  //现在武器的 damage 没有用，只能改defense
     _player->bullet_max_num = 30;
-    _player->FireCD = 0.15f;
+    _player->FireCD = 0.2f;
 
     _player->lastFireTime = 0.0f;
     _player->lastHitTime = 0.0f;
@@ -54,8 +54,6 @@ void PlayerQuitBattle(Player_t* _player){
 
 void PlayerResurrect(Player_t* _player){
     _player->hp = 100;
-    _player->bullet_num = 30;
-    _player->mag_num = 120;
     _player->playerState = battling;
 
     HAL_GPIO_WritePin(RX_LED_GPIO_Port,RX_LED_Pin,GPIO_PIN_RESET);
