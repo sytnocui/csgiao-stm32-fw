@@ -66,9 +66,9 @@ void USBSendFire(int _bulletNum){
     USBSend(_str);
 }
 
-void USBSendHit(int _hp){
+void USBSendHit(int _damage){
     char _str[20];
-    sprintf(_str,"Hit|%d,", _hp);
+    sprintf(_str,"Hit|%d,", _damage);
     USBSend(_str);
 }
 

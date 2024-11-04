@@ -12,6 +12,8 @@
 
 Player_t player;
 
+// 枪里的hp只作为记录显示用，不作为判断依据，因为毒圈伤害枪检测不出来，只能app同步
+
 void PlayerInit(Player_t* _player){
     _player->hp = 100;
     _player->bullet_num = 30;
@@ -104,9 +106,12 @@ void PlayerHitUpdate(Player_t* _player){
     Hit();
 //    PlayMusic(HIT_SOUND_DATA, HIT_SOUND_LENGTH);
 
+    //这个是算着玩的，不计入依据
     _player->hp -= (_player->damage - _player->defense );
-//    BlueToothSendHit(_player->hp);
-    USBSendHit(_player->hp);
+//    BlueToothSendHit(_player->damage);
+
+//枪也不计算护甲，统一由app计算
+    USBSendHit(_player->damage);
 
 }
 
